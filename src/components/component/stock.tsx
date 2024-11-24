@@ -29,8 +29,19 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { Input } from "@/components/ui/input"
 
+// Define la interfaz para el producto
+interface Product {
+  id: number;
+  name: string;
+  sku: string;
+  stock: number;
+  price: number;
+  size: string;
+}
+
 export function Stock() {
-  const [products, setProducts] = useState([
+  // Lista de productos inicial
+  const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
       name: "Producto 1",
@@ -71,15 +82,25 @@ export function Stock() {
       price: 34.99,
       size: "L",
     },
-  ])
-  const [editingProduct, setEditingProduct] = useState(null)
-  const handleEditProduct = (product) => {
-    setEditingProduct(product)
+  ]);
+
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null); // Producto editado, puede ser null
+
+  // Maneja la edición de un producto
+  const handleEditProduct = (product: Product) => {
+    setEditingProduct(product);
   }
-  const handleSaveProduct = (updatedProduct) => {
-    setProducts((prevProducts) => prevProducts.map((p) => (p.id === updatedProduct.id ? updatedProduct : p)))
-    setEditingProduct(null)
+
+  // Maneja el guardado de un producto actualizado
+  const handleSaveProduct = (updatedProduct: Product) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((p) =>
+        p.id === updatedProduct.id ? updatedProduct : p // Reemplaza el producto editado
+      )
+    );
+    setEditingProduct(null); // Limpia el estado de edición
   }
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -364,10 +385,10 @@ export function Stock() {
   )
 }
 
-function DownloadIcon(props) {
+const DownloadIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
-      {...props}
+      {...props} // Las props se pasan aquí
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -382,11 +403,11 @@ function DownloadIcon(props) {
       <polyline points="7 10 12 15 17 10" />
       <line x1="12" x2="12" y1="15" y2="3" />
     </svg>
-  )
+  );
 }
 
 
-function ExpandIcon(props) {
+const ExpandIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
@@ -409,7 +430,7 @@ function ExpandIcon(props) {
 }
 
 
-function GaugeIcon(props) {
+const GaugeIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
@@ -430,7 +451,7 @@ function GaugeIcon(props) {
 }
 
 
-function MenuIcon(props) {
+const MenuIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
@@ -452,7 +473,7 @@ function MenuIcon(props) {
 }
 
 
-function Package2Icon(props) {
+const Package2Icon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
@@ -474,7 +495,7 @@ function Package2Icon(props) {
 }
 
 
-function PackageIcon(props) {
+const PackageIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
@@ -497,7 +518,7 @@ function PackageIcon(props) {
 }
 
 
-function SettingsIcon(props) {
+const SettingsIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
@@ -518,7 +539,7 @@ function SettingsIcon(props) {
 }
 
 
-function ShoppingBasketIcon(props) {
+const ShoppingBasketIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
@@ -544,7 +565,7 @@ function ShoppingBasketIcon(props) {
 }
 
 
-function StoreIcon(props) {
+const StoreIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
@@ -568,7 +589,7 @@ function StoreIcon(props) {
 }
 
 
-function UserIcon(props) {
+const UserIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
@@ -589,7 +610,7 @@ function UserIcon(props) {
 }
 
 
-function WarehouseIcon(props) {
+const WarehouseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}
